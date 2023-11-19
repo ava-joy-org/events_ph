@@ -3,39 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/tab.css">
+<!--    <script src="/js/main.js" defer></script>-->
 </head>
 <body>
-    <p1> This is index</p1>
-    <form th:action="@{/create}" method="get">
-        <button type="submit">CREATE</button>
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Event Name</th>
-                <th>Location</th>
-                <th>Schedule</th>
-                <th>Start Time</th>
-                <th>Start End</th>
-                <th>Duration</th>
-                <th>Attendance</th>
-                <th>LINK</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>New Year Party</td>
-                <td>Main Plaza</td>
-                <td>January 1, 2023</td>
-                <td>8:00 PM</td>
-                <td>12:00 AM</td>
-                <td>4 hours</td>
-                <td>10000</td>
-                <td><a th:href="@{/join}">JOIN NOW</a></td>
-            </tr>
-        </tbody>
-    </table>
-
+    <h2>EVENT LIST</h2>
+    <div class="btn_create">
+        <form th:action="@{/create}" method="get">
+            <button type="submit">CREATE</button>
+        </form>
+    </div>
+    <div id="tab_upcoming">
+        <div class="table_container">
+            <p th:if="${eventsDisp.size()} < 1">NO EVENT AVAILABLE</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event Name</th>
+                        <th class="tr_others">Location</th>
+                        <th class="tr_others">Schedule</th>
+                        <th class="tr_others">Start Time</th>
+                        <th class="tr_others">Duration(Hours)</th>
+                        <th class="tr_others">Attendance</th>
+                        <th class="tr_desc">Description</th>
+                        <th class="tr_others">LINK</th>
+                        <th class="tr_others" th:cols="2"></th>
+                    </tr>
+                </thead>
+                <tbody th:each="ev: ${eventsDisp}">
+                    <tr>
+                        <td th:text="${ev.name}"></td>
+                        <td th:text="${ev.location}"></td>
+                        <td th:text="${ev.date}"></td>
+                        <td th:text="${ev.start_time}"></td>
+                        <td th:text="${ev.duration}"></td>
+                        <td th:text="${ev.attendance}"></td>
+                        <td th:text="${ev.description}"></td>
+                        <td th:object="${eventsJoin}"><a th:href="@{/join(id=${ev.getId()})}">JOIN NOW</a></td>
+                        <td th:cols="2">
+                            <form>
+                                <button type="submit">UPDATE</button>
+                                <button type="submit">DELETE</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
