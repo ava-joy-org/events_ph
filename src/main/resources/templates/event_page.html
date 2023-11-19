@@ -11,24 +11,28 @@
    <table>
        <tr>
            <td>EVENT NAME: </td>
-           <td th:text="${ev_data.get().name}"></td>
+           <td th:text="${ev_data.name}"></td>
        </tr>
        <tr>
            <td>EVENT SCHEDULE: </td>
-           <td th:text="${ev_data.get().date}"></td>
+           <td th:text="${ev_data.date}"></td>
        </tr>
        <tr>
            <td>EVENT TIME: </td>
-           <td th:text="${ev_data.get().start_time}"></td>
+           <td th:text="${ev_data.start_time}"></td>
        </tr>
        <tr>
            <td>EVENT ATTENDANCE COUNT: </td>
-           <td th:text="${ev_data.get().attendance}"></td>
+           <td th:text="${ev_data.attendance}"></td>
        </tr>
    </table>
 
-    <form th:method="post" th:object="${joinMember}" th:action="@{/attendance}">
+    <form th:method="post" th:object="${joinMember}" th:action="@{/attendance(id=${ev_data.getId()})}">
         <button type="submit">JOIN EVENT</button>
+    </form>
+
+    <form th:method="get" th:action="@{/home}">
+        <button type="submit">BACK TO HOME</button>
     </form>
 
 
