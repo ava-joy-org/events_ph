@@ -1,10 +1,14 @@
-# events_now
+# title
 Events List
 SPRING MVC personal project
 
-functions: 
-    -   create event
-    -   join event
-    -   cancel event
-    -   countdown
-    -   update event
+# functions
+functions:
+create event
+join event
+cancel event
+countdown
+update event
+
+# db
+mongodb (nosql)
