@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+    <p1> This is index</p1>
+    <form th:action="@{/create}" method="get">
+        <button type="submit">CREATE</button>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Location</th>
+                <th>Schedule</th>
+                <th>Start Time</th>
+                <th>Start End</th>
+                <th>Duration</th>
+                <th>Attendance</th>
+                <th>LINK</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>New Year Party</td>
+                <td>Main Plaza</td>
+                <td>January 1, 2023</td>
+                <td>8:00 PM</td>
+                <td>12:00 AM</td>
+                <td>4 hours</td>
+                <td>10000</td>
+                <td><a th:href="@{/join}">JOIN NOW</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
