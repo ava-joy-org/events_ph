@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Page</title>
+    <link rel="stylesheet" href="/css/eventpage.css">
+</head>
+<body>
+    <p1> Event Page</p1>
+
+   <table>
+       <tr>
+           <td>EVENT NAME: </td>
+           <td th:text="${ev_data.get().name}"></td>
+       </tr>
+       <tr>
+           <td>EVENT SCHEDULE: </td>
+           <td th:text="${ev_data.get().date}"></td>
+       </tr>
+       <tr>
+           <td>EVENT TIME: </td>
+           <td th:text="${ev_data.get().start_time}"></td>
+       </tr>
+       <tr>
+           <td>EVENT ATTENDANCE COUNT: </td>
+           <td th:text="${ev_data.get().attendance}"></td>
+       </tr>
+   </table>
+
+    <form th:method="post" th:object="${joinMember}" th:action="@{/attendance}">
+        <button type="submit">JOIN EVENT</button>
+    </form>
+
+
+
+
+</body>
+</html>

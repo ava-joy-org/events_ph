@@ -4,9 +4,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(value = "event_list")
+@Document(collection = "event_list")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Events {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +28,11 @@ public class Events {
 
     private int duration;
 
-    @Transient
     private long attendance;
 
-    @Transient
     private boolean status;
+
+    private String description;
 
 //    private List<Attendance> attendanceList;
 

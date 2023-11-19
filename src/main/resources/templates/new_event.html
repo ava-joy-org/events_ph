@@ -3,9 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Event</title>
+    <link rel="stylesheet" href="/newevent.css">
 </head>
 <body>
-    <p1> new event</p1>
+    <p1>create new event</p1>
+    <form th:method="post" th:object="${events}" th:action="@{/save}">
+        <div>
+            <label for="eventNameTxt"> Event Name </label>
+            <input th:field="*{name}" id="eventNameTxt" type="text" required>
+        </div>
+
+        <div>
+            <label for="locationTxt">Location </label>
+            <input th:field="*{location}" id="locationTxt" type="text" required>
+        </div>
+
+        <div>
+            <label for="dateText">Schedule </label>
+            <input th:field="*{date}" id="dateText" type="date" required>
+        </div>
+
+        <div>
+            <label for="timeStartTxt">Time Start </label>
+            <input th:field="*{start_time}" id="timeStartTxt" type="time" required>
+        </div>
+
+        <div>
+            <label for="durationTxt">Event Duration </label>
+            <input th:field="*{duration}" id="durationTxt" type="number" required>
+        </div>
+
+        <div>
+            <label for="durationTxt">Event Description </label>
+            <textarea th:field="*{description}" id="decriptionTxt" rows="5" cols="100" placeholder="Type your message here..."></textarea>
+        </div>
+
+        <div>
+<!--            <button type="submit" th:disabled="${#strings.isEmpty(userInput)}">Submit</button>-->
+<!--            <input type="submit" value="CREATE EVENT">-->
+            <button type="submit">CREATE EVENT</button>
+        </div>
+    </form>
 
 
 </body>
