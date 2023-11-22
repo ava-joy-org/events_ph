@@ -1,11 +1,13 @@
 package com.avaroti.events.controller;
 
+import com.avaroti.events.model.Attendance;
 import com.avaroti.events.model.Events;
 import com.avaroti.events.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,18 +19,41 @@ public class EventsController {
 
     private final EventService service;
 
+    @GetMapping("/create")
+    public String create(Model model) {
+        log.info("Creating new Event");
+        model.addAttribute("events", new Events());
+        model.addAttribute("update_status", false);
+        return "new_event";
+    }
+
     @PostMapping("/save")
-    public String save(Model model, @ModelAttribute Events event) {
+    public String save(Model model, @ModelAttribute("events") Events event) {
         Events events = service.create(event);
-        model.addAttribute("events", events);
-        log.info("Redirecting to HOME: Event ID: {}", events.getId());
+        log.info("Redirecting to Home page. Event created: {}", events.getId());
         return "redirect:/home";
     }
 
-    @PostMapping("/attendance")
-    public String attendance(Model model, @ModelAttribute Events joinMember){
-        service.attendance(joinMember);
-        model.addAttribute("ev_data", joinMember);
-        return "redirect:/join?id="+ joinMember.getId();
+    @GetMapping("/eventDisplay")
+    public String displayEvent(Model model, @RequestParam("ev_id") String id) {
+        log.info("Display event. EventID: {}", id);
+        model.addAttribute("ev_data", service.getEventById(id));
+        return "event_page";
+    }
+
+    @GetMapping("/newAttendance")
+    public String attendance(Model model, @RequestParam("ev_id") String id){
+        log.info("EVENT ID: {}",id);
+        model.addAttribute("attendee", new Attendance());
+        model.addAttribute("ev_id", id);
+        return "attendance";
+    }
+
+    @PostMapping("/submitAttendance")
+    public String submitAttendance(Model model, @RequestParam("ev_id") String id,  @ModelAttribute("attendee") Attendance attendance){
+        log.info("SUBMIT Event_ID: {}", id);
+        service.attendance(attendance, id);
+
+        return "redirect:/eventDisplay?ev_id=" + id;
     }
 }

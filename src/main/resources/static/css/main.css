@@ -5,6 +5,11 @@ table{
     align-content: center;
 }
 
+.search_area{
+    padding-bottom: 10px;
+    padding-left: 75%;
+    display: inline-block;
+}
 .table_container{
     max-height: 500px;
     overflow-y: auto;
@@ -30,4 +35,35 @@ tr:hover{
 .btn_create{
     padding-left: 90%;
     padding-bottom: 10px;
+}
+
+.btn_delete {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 10px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 14px 24px;
+    border: none;
+    transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+    background: linear-gradient(to right, rgb(230, 30, 77) 0%, rgb(227, 28, 95) 50%, rgb(215, 4, 102) 100%);
+    color: #fff;
+
+}
+
+.btn_update{
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 10px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 14px 24px;
+    border: none;
+    transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+    background: linear-gradient(to right, rgb(51, 120, 130) 0%, rgb(51, 120, 150) 50%, rgb(51, 120, 120) 100%);
+    color: #fff;
 }

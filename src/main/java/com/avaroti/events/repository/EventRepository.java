@@ -10,6 +10,10 @@ import java.util.List;
 @Repository
 public interface EventRepository extends MongoRepository<Events, String> {
 
-//    List<Events> findAllByOOrderByDate();
+    @Query(value = "{}", sort= "{date:1, start_time:1}") //ASC
+    List<Events> findAllByOOrderByDate();
+
+    @Query("{'id': ?0}")
+    Events updateEventsById(String id, Events event);
 
 }

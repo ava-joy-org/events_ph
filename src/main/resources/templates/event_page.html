@@ -6,9 +6,13 @@
     <link rel="stylesheet" href="/css/eventpage.css">
 </head>
 <body>
-    <p1> Event Page</p1>
+    <p> Event Page</p>
 
    <table>
+       <tr>
+           <td>EVENT ID: </td>
+           <td th:text="${ev_data.id}"></td>
+       </tr>
        <tr>
            <td>EVENT NAME: </td>
            <td th:text="${ev_data.name}"></td>
@@ -27,16 +31,13 @@
        </tr>
    </table>
 
-    <form th:method="post" th:object="${joinMember}" th:action="@{/attendance(id=${ev_data.getId()})}">
+    <form th:method="get" th:action="@{/newAttendance}">
+        <input type="hidden" th:name="${'ev_id'}" th:value="${ev_data.getId()}"/>
         <button type="submit">JOIN EVENT</button>
     </form>
 
     <form th:method="get" th:action="@{/home}">
         <button type="submit">BACK TO HOME</button>
     </form>
-
-
-
-
 </body>
 </html>
