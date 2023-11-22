@@ -6,9 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,22 +21,39 @@ public class HomeController {
     public String home(Model model) {
         log.info("Home page display");
         List<Events> displayEvents = service.getAll();
-        model.addAttribute("eventsDisp", displayEvents);
+        model.addAttribute("events", displayEvents);
         return "index";
     }
 
+    @GetMapping("/join")
+    public String join(Model model, @RequestParam("id") String id) {
+        log.info("Joining event");
+        return "redirect:/newAttendance?ev_id=" + id;
+    }
 
-    @GetMapping("/create")
-    public String create(Model model, Events event) {
-        log.info("Creating new Event");
-        model.addAttribute("events", event);
+    @GetMapping("/visitToUpdate/{id}")
+    public String visitToUpdate(Model model, @PathVariable("id") String id){
+        log.info("Updating eventID");
+        Events ev = service.getEventById(id);
+        ev.setUpdate_status(true);
+        model.addAttribute("events", ev);
+        model.addAttribute("update_id", id);
+        model.addAttribute("update_status", true);
         return "new_event";
     }
 
-    @GetMapping("/join")
-    public String join(Model model, @ModelAttribute Events eventsJoin) {
-        log.info("Joining event");
-        model.addAttribute("ev_data", service.getEventById(eventsJoin.getId()));
-        return "event_page";
+    @PostMapping("/update/{id}")
+    public String update(Model model, @PathVariable("id") String id, @ModelAttribute("events") Events event) {
+        model.addAttribute("update_status", false);
+        return "redirect:/home";
     }
+
+    @RequestMapping("/delete/{id}")
+    public String delete(Model model, @PathVariable(name = "id") String id){
+        log.info("Deleting eventID: {}", id);
+        service.delete(id);
+        return "redirect:/home";
+    }
+
+
 }

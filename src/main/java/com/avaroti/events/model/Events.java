@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "event_list")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,11 +32,12 @@ public class Events {
 
     private long attendance;
 
-    private boolean status;
+    @Transient
+    private boolean update_status;
 
     private String description;
 
-//    private List<Attendance> attendanceList;
+    private List<Attendance> attendanceList;
 
 
 }

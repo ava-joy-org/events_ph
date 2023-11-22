@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Event</title>
-    <link rel="stylesheet" href="/newevent.css">
+    <link rel="stylesheet" href="/css/newevent.css">
 </head>
 <body>
-    <p1>create new event</p1>
-    <form th:method="post" th:object="${events}" th:action="@{/save}">
+    <h1>new event</h1>
+    <form th:method="post" th:object="${events}" th:action="${update_status} ? '/update/{id}(id=${update_id})}' : '/save'">
         <div>
             <label for="eventNameTxt"> Event Name </label>
             <input th:field="*{name}" id="eventNameTxt" type="text" required>
@@ -34,17 +34,20 @@
         </div>
 
         <div>
-            <label for="durationTxt">Event Description </label>
-            <textarea th:field="*{description}" id="decriptionTxt" rows="5" cols="100" placeholder="Type your message here..."></textarea>
+            <label for="descriptionTxt">Event Description </label>
+            <textarea th:field="*{description}" id="descriptionTxt" rows="5" cols="100" placeholder="Type your message here..."></textarea>
         </div>
 
-        <div>
-<!--            <button type="submit" th:disabled="${#strings.isEmpty(userInput)}">Submit</button>-->
-<!--            <input type="submit" value="CREATE EVENT">-->
+        <div th:if="${!update_status}">
             <button type="submit">CREATE EVENT</button>
+        </div>
+        <div th:if="${update_status}">
+            <button type="submit">UPDATE EVENT</button>
         </div>
     </form>
 
-
+    <form th:method="get" th:action="@{/home}">
+        <button type="submit">BACK TO HOME</button>
+    </form>
 </body>
 </html>

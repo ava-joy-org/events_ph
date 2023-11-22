@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Attendance</title>
+    <link rel="stylesheet" href="/css/newevent.css">
+</head>
+<body>
+    <p>attendance page</p>
+    <form th:method="post" th:object="${attendee}" th:action="@{/submitAttendance}">
+        <div>
+            <input type="hidden" th:name="${'ev_id'}" th:value="${ev_id}"/>
+        </div>
+        <div>
+            <label for="memberNameTxt">Full Name </label>
+            <input th:field="*{name}" id="memberNameTxt" type="text" required>
+<!--            <input id="memberNameTxt" type="text" required>-->
+        </div>
+
+        <div>
+            <label for="emailTxt">Email </label>
+            <input th:field="*{email}" id="emailTxt" type="email" required>
+        </div>
+
+        <div>
+            <label for="contactNoTxt">Contact Number </label>
+            <input th:field="*{contact_no}" id="contactNoTxt" type="tel" required>
+        </div>
+        <div>
+            <button type="submit">SUBMIT ATTENDANCE</button>
+        </div>
+    </form>
+
+    <form th:method="get" th:action="@{/home}">
+        <button type="submit">BACK TO HOME</button>
+    </form>
+</body>
+</html>
