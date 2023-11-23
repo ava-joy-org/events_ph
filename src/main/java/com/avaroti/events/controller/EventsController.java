@@ -37,7 +37,9 @@ public class EventsController {
     @GetMapping("/eventDisplay")
     public String displayEvent(Model model, @RequestParam("ev_id") String id) {
         log.info("Display event. EventID: {}", id);
-        model.addAttribute("ev_data", service.getEventById(id));
+        Events ev = service.getEventById(id);
+        model.addAttribute("ev_data", ev);
+        model.addAttribute("attendees",ev.getAttendanceList());
         return "event_page";
     }
 

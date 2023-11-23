@@ -7,7 +7,10 @@
 </head>
 <body>
     <h1>new event</h1>
-    <form th:method="post" th:object="${events}" th:action="${update_status} ? '/update/{id}(id=${update_id})}' : '/save'">
+    <form th:method="post" th:object="${events}" th:action="${update_status} ? '/update' : '/save'">
+        <div>
+            <input type="hidden" th:name="${'ev_id'}" th:value="${update_id}"/>
+        </div>
         <div>
             <label for="eventNameTxt"> Event Name </label>
             <input th:field="*{name}" id="eventNameTxt" type="text" required>
@@ -31,6 +34,11 @@
         <div>
             <label for="durationTxt">Event Duration </label>
             <input th:field="*{duration}" id="durationTxt" type="number" required>
+        </div>
+
+        <div>
+            <label for="imgTxt">Image Link</label>
+            <input th:field="*{imageSrc}" id="imgTxt" type="text" required>
         </div>
 
         <div>
