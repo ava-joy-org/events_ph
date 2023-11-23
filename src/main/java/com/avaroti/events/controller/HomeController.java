@@ -18,10 +18,11 @@ public class HomeController {
     private final EventService service;
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(Model model, @ModelAttribute("keyword") String keyword) {
         log.info("Home page display");
         List<Events> displayEvents = service.getAll();
         model.addAttribute("events", displayEvents);
+        model.addAttribute("keyword", keyword);
         return "index";
     }
 
@@ -33,18 +34,20 @@ public class HomeController {
 
     @GetMapping("/visitToUpdate/{id}")
     public String visitToUpdate(Model model, @PathVariable("id") String id){
-        log.info("Updating eventID");
+        log.info("Updating eventID: {}", id);
         Events ev = service.getEventById(id);
-        ev.setUpdate_status(true);
         model.addAttribute("events", ev);
         model.addAttribute("update_id", id);
         model.addAttribute("update_status", true);
         return "new_event";
     }
 
-    @PostMapping("/update/{id}")
-    public String update(Model model, @PathVariable("id") String id, @ModelAttribute("events") Events event) {
+    @PostMapping("/update")
+    public String update(Model model, @RequestParam("ev_id") String id, @ModelAttribute("events") Events event) {
+        Events ev = service.update(id, event);
+        model.addAttribute("events", ev);
         model.addAttribute("update_status", false);
+        log.info("Updated eventID: {}", ev.getId());
         return "redirect:/home";
     }
 
@@ -53,6 +56,16 @@ public class HomeController {
         log.info("Deleting eventID: {}", id);
         service.delete(id);
         return "redirect:/home";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model,@RequestParam("searchWord") String keyword){
+        log.info("Searching for keyword {}", keyword);
+        List<Events> ev = service.search(keyword);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("events", ev);
+        model.addAttribute("searchCount", ev.size());
+        return "search_result";
     }
 
 

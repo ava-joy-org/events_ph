@@ -8,11 +8,11 @@
 <body>
     <p> Event Page</p>
 
+    <form th:method="get" th:action="@{/home}">
+        <button type="submit">BACK TO HOME</button>
+    </form>
+
    <table>
-       <tr>
-           <td>EVENT ID: </td>
-           <td th:text="${ev_data.id}"></td>
-       </tr>
        <tr>
            <td>EVENT NAME: </td>
            <td th:text="${ev_data.name}"></td>
@@ -29,15 +29,30 @@
            <td>EVENT ATTENDANCE COUNT: </td>
            <td th:text="${ev_data.attendance}"></td>
        </tr>
+       <tr>
+           <td>DESCRIPTION: </td>
+           <td th:text="${ev_data.description}"></td>
+       </tr>
    </table>
 
     <form th:method="get" th:action="@{/newAttendance}">
         <input type="hidden" th:name="${'ev_id'}" th:value="${ev_data.getId()}"/>
         <button type="submit">JOIN EVENT</button>
     </form>
+    <br>
+    <br>
+    <h2>ATTENDEES</h2>
+    <table class="tbl_attendees">
+        <tr>
+            <th>EMAIL ADDRESS</th>
+            <th>CONTACT NUMBER</th>
+        </tr>
+        <tr th:each="attend : ${attendees}">
+            <td th:text="${attend.getEmail()}"></td>
+            <td th:text="${attend.getContact_no()}"></td>
+        </tr>
 
-    <form th:method="get" th:action="@{/home}">
-        <button type="submit">BACK TO HOME</button>
-    </form>
+    </table>
+
 </body>
 </html>
