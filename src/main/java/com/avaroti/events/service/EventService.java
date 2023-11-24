@@ -3,14 +3,13 @@ package com.avaroti.events.service;
 import com.avaroti.events.model.Attendance;
 import com.avaroti.events.model.Events;
 import com.avaroti.events.repository.EventRepository;
-import com.mongodb.client.MongoClients;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,11 @@ public class EventService {
 
 
     public Events create(Events event) {
-//        event.setUpdate_status(false);
+//        String inputDate = event.getDate();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate date = LocalDate.parse(inputDate, formatter);
+//        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        event.setDate(event.getDate());
         event.setLocation(event.getLocation().toUpperCase());
         event.setAttendance(event.getAttendanceList() == null ? 0 : event.getAttendanceList().size());
         return repo.save(event);
@@ -52,13 +55,18 @@ public class EventService {
         System.out.println("EVENT ID: " +  id);
         Events ev = repo.findById(id).orElse(null);
         if(ev != null) {
-           ev.setDate(updatedEvent.getDate());
-           ev.setDescription(updatedEvent.getDescription());
-           ev.setLocation(updatedEvent.getLocation());
-           ev.setStart_time(updatedEvent.getStart_time());
-           ev.setName(updatedEvent.getName());
-           ev.setImageSrc(updatedEvent.getImageSrc());
-           return repo.save(ev);
+//            String inputDate = updatedEvent.getDate();
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//            LocalDate date = LocalDate.parse(inputDate, formatter);
+//            DayOfWeek dayOfWeek = date.getDayOfWeek();
+//            ev.setDate(inputDate + " (" + String.valueOf(dayOfWeek).substring(0,3) +")");
+            ev.setDate(updatedEvent.getDate());
+            ev.setDescription(updatedEvent.getDescription());
+            ev.setLocation(updatedEvent.getLocation());
+            ev.setStart_time(updatedEvent.getStart_time());
+            ev.setName(updatedEvent.getName());
+            ev.setImageSrc(updatedEvent.getImageSrc());
+            return repo.save(ev);
         }
         return null;
     }

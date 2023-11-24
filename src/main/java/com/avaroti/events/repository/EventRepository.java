@@ -17,7 +17,8 @@ public interface EventRepository extends MongoRepository<Events, String> {
 ////    void updateDescriptionByName(String name, @Query(value = "{$set: {'description': ?1}}") String newDescription);
 //    Events updateEventsById(String id, Events event);
 
-    @Query("{'name': {$regex: ?0}}")
+//    @Query("{'name': {$regex: ?0}}")
+    @Query("{$or :[{'name': {$regex: ?0}},{'description': {$regex: ?0}},{'location': {$regex: ?0}}]}")
     List<Events> searchByName(String keyword);
 
 }

@@ -4,55 +4,146 @@
     <meta charset="UTF-8">
     <title>Event Page</title>
     <link rel="stylesheet" href="/css/eventpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <p> Event Page</p>
+    <div class="main_div">
+        <div class="first_div"></div>
+        <div class="second_div">
+            <div class="sec_title_div">
+                <h1 th:text="${ev_data.getName()}"></h1>
+            </div>
+            <div class="sec_photo_div" th:style="'background-image: url(' + ${ev_data.getImageSrc()} + ')'"></div>
+        </div>
+        <div class="space_div"></div>
+        <div class="third_div">
+            <div class="third_details_div">
+                <div class="disp">
+                    <div class="disp_left"><i class="fa-regular fa-calendar-days"></i></i></div>
+                    <div class="disp_right"><p th:text="${ev_data.getDate()}"></p></div>
+                </div>
+                <div class="disp">
+                    <div class="disp_left"><i class="fa-solid fa-clock"></i></div>
+                    <div class="disp_right"><p th:text="${ev_data.getStart_time()}"></p></div>
+                </div>
+                <div class="disp">
+                    <div class="disp_left"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="disp_right"><p th:text="${ev_data.getLocation()}"></p></div>
+                </div>
+                <div class="disp">
+                    <div class="disp_left"><i class="fa-solid fa-users"></i></div>
+                    <div class="disp_right"><p th:text="${ev_data.getAttendance()}"></p></div>
+                </div>
+                <div class="disp">
+                    <div class="disp_left"><i class="fa-solid fa-circle-info"></i></div>
+                    <div class="disp_right disp_desc"><p th:text="${ev_data.getDescription()}"></p></div>
+                </div>
+            </div>
+            <div class="third_btn_div">
+<!--                <div class="btn_div1">-->
+<!--                    <p class="cash_data"><i class="fa-solid fa-dollar-sign"></i></p>-->
+<!--                    <p class="cash_data">200</p>-->
+<!--                </div>-->
+                <div class="btn_div1">
+                    <form th:method="get" th:action="@{/home}">
+<!--                        <input type="hidden" th:name="${'ev_id'}" th:value="${ev_data.getId()}"/>-->
+                        <button class="btn_join" type="submit">BACK</button>
+                    </form>
+                </div>
+                <div class="btn_div2">
+                    <form th:method="get" th:action="@{/newAttendance}">
+                        <input type="hidden" th:name="${'ev_id'}" th:value="${ev_data.getId()}"/>
+                        <button class="btn_join" type="submit">JOIN NOW</button>
+                    </form>
+                </div>
+
+            </div>
+            <div class="third_tbl_div"></div>
+        </div>
+        <div class="fourth_div"></div>
+
+    </div>
+
+<!--        <div class="top_div">-->
+<!--&lt;!&ndash;            <h1> TOP</h1>&ndash;&gt;-->
+<!--        </div>-->
+
+<!--        <div class="mid_div">-->
+<!--            <div class="mid_main">-->
+<!--                    <div  class="mid_right" th:style="'background-image: url(' + ${ev_data.getImageSrc()} + ')'">-->
+<!--                    </div>-->
+<!--                    <div class="mid_left">-->
+<!--                        <h3 th:text="${ev_data.getName()}"></h3>-->
+<!--                        <p>-->
+<!--                            <span th:text="${ev_data.getDate()}"></span>-->
+<!--                            <span th:text="${ev_data.getStart_time()}"></span>-->
+<!--                        </p>-->
+
+<!--                    </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="bottom_div">-->
+<!--&lt;!&ndash;            <h1> BOT</h1>&ndash;&gt;-->
+<!--        </div>-->
+
+<!--    <div class="main_div">-->
+<!--        <div class="event_details">-->
+<!--&lt;!&ndash;            <div class="img_container">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="event_img" th:style="'background-image: url(' + ${ev_data.getImageSrc()} + '); height: 100%; width: 100%;  background-size: cover; background-position: center; border-top-left-radius: 10px; border-top-right-radius: 10px; background-repeat: none'">&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="div_img">&ndash;&gt;-->
+<!--&lt;!&ndash;                <img class="event_img" th:src="${ev_data.getImageSrc()}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <table>&ndash;&gt;-->
+<!--&lt;!&ndash;                <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td>EVENT NAME: </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td th:text="${ev_data.name}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td>EVENT SCHEDULE: </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td th:text="${ev_data.date}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td>EVENT TIME: </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td th:text="${ev_data.start_time}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td>EVENT ATTENDANCE COUNT: </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td th:text="${ev_data.attendance}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td>DESCRIPTION: </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <td th:text="${ev_data.description}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            </table>&ndash;&gt;-->
+<!--            <form th:method="get" th:action="@{/newAttendance}">-->
+<!--                <input type="hidden" th:name="${'ev_id'}" th:value="${ev_data.getId()}"/>-->
+<!--                <button type="submit">JOIN EVENT</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div class="attendees_list">-->
+<!--            <h2>ATTENDEES</h2>-->
+<!--            <table class="tbl_attendees">-->
+<!--                <tr>-->
+<!--                    <th>EMAIL ADDRESS</th>-->
+<!--                    <th>CONTACT NUMBER</th>-->
+<!--                </tr>-->
+<!--                <tr th:each="attend : ${attendees}">-->
+<!--                    <td th:text="${attend.getEmail()}"></td>-->
+<!--                    <td th:text="${attend.getContact_no()}"></td>-->
+<!--                </tr>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <form th:method="get" th:action="@{/home}">
         <button type="submit">BACK TO HOME</button>
     </form>
 
-   <table>
-       <tr>
-           <td>EVENT NAME: </td>
-           <td th:text="${ev_data.name}"></td>
-       </tr>
-       <tr>
-           <td>EVENT SCHEDULE: </td>
-           <td th:text="${ev_data.date}"></td>
-       </tr>
-       <tr>
-           <td>EVENT TIME: </td>
-           <td th:text="${ev_data.start_time}"></td>
-       </tr>
-       <tr>
-           <td>EVENT ATTENDANCE COUNT: </td>
-           <td th:text="${ev_data.attendance}"></td>
-       </tr>
-       <tr>
-           <td>DESCRIPTION: </td>
-           <td th:text="${ev_data.description}"></td>
-       </tr>
-   </table>
-
-    <form th:method="get" th:action="@{/newAttendance}">
-        <input type="hidden" th:name="${'ev_id'}" th:value="${ev_data.getId()}"/>
-        <button type="submit">JOIN EVENT</button>
-    </form>
     <br>
     <br>
-    <h2>ATTENDEES</h2>
-    <table class="tbl_attendees">
-        <tr>
-            <th>EMAIL ADDRESS</th>
-            <th>CONTACT NUMBER</th>
-        </tr>
-        <tr th:each="attend : ${attendees}">
-            <td th:text="${attend.getEmail()}"></td>
-            <td th:text="${attend.getContact_no()}"></td>
-        </tr>
-
-    </table>
 
 </body>
 </html>
