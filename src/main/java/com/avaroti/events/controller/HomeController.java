@@ -17,11 +17,18 @@ public class HomeController {
 
     private final EventService service;
 
+
+    @GetMapping("/test")
+    public String test(){
+        return "sample";
+    }
     @GetMapping("/home")
     public String home(Model model, @ModelAttribute("keyword") String keyword) {
         log.info("Home page display");
-        List<Events> displayEvents = service.getAll();
-        model.addAttribute("events", displayEvents);
+        List<Events> open = service.getAllValid();
+        List<Events> closed = service.getAllInvalid();
+        model.addAttribute("events", open);
+        model.addAttribute("closed", closed);
         model.addAttribute("keyword", keyword);
         return "index";
     }

@@ -18,10 +18,10 @@
             </div>
             <div class="header_area">
                 <form th:method="get" th:action="@{/search}">
-                    <label for="searchTxt">
-                        SEARCH:
-                        <input class="search_txt" th:name="${'searchWord'}" type="text" id="searchTxt"/>
-                    </label>
+<!--                    <label for="searchTxt">-->
+<!--                        SEARCH:-->
+                        <input class="search_txt" th:name="${'searchWord'}" th:value="${srchTxt}" type="text" id="searchTxt" placeholder="search"/>
+<!--                    </label>-->
                     <button class="btn_search" type="submit">SEARCH</button>
                 </form>
             </div>
@@ -31,19 +31,27 @@
         <div class="main_card">
             <div class="card" th:each="ev: ${events}">
                 <div class="img_container">
-                    <a th:href="@{/eventDisplay(ev_id=${ev.getId()})}" class="link_image">
+                    <a style="text-decoration: none" th:href="@{/eventDisplay(ev_id=${ev.getId()})}" class="link_image">
                         <div th:style="'background-image: url(' + ${ev.getImageSrc()} + '); height: 100%; width: 100%;  background-size: cover; background-position: center; border-top-left-radius: 10px; border-top-right-radius: 10px; background-repeat: none'">
                         </div>
                     </a>
                 </div>
                 <div class="container">
-                    <div class="btn_area">
-                        <form th:method="get" th:action="@{/visitToUpdate/{id}(id=${ev.id})}">
-                            <button class="btn_update" type="submit"><i class="fa-solid fa-pen"></i></button>
-                        </form>
-                        <form th:method="post" th:action="@{/delete/{id}(id=${ev.id})}">
-                            <button class="btn_delete" type="submit"><i class="fa-solid fa-trash"></i></button>
-                        </form>
+                    <div class="btns_2">
+                        <div class="btns_left">
+                            <p class="float" th:text="${ev.getAttendance()}"></p>
+                            <p><i class="fa-solid fa-user"></i></p>
+                            <p class="float2" th:text="${ev.getView_count()}"></p>
+                            <p><i class="fa-regular fa-eye"></i></p>
+                        </div>
+                        <div class="btns_right">
+                            <form th:method="get" th:action="@{/visitToUpdate/{id}(id=${ev.id})}">
+                                <button class="btn_update" type="submit"><i class="fa-solid fa-pen"></i></button>
+                            </form>
+                            <form th:method="post" th:action="@{/delete/{id}(id=${ev.id})}">
+                                <button class="btn_delete" type="submit"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
                     </div>
                    <h3 class="title_area"> <span th:text="${ev.getName()}"></span> </h3>
                     <p>
@@ -71,9 +79,15 @@
             </div>
         </div>
     </main>
-
     <footer>
 
     </footer>
+    <script>
+        // Refresh the page every 5 seconds (5000 milliseconds)
+        console.log("SCHEDULED")
+        setInterval(function() {
+            location.reload();
+        }, (60*1000));
+    </script>
 </body>
 </html>

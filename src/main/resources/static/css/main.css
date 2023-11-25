@@ -2,12 +2,17 @@
 
 body{
     background-color: lavenderblush;
+    /*background-image: url("../images/bg1.jpg");*/
+    /*background-color: rgba(255,255,255, 1);*/
     /*font-family: 'San Francisco', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;*/
     font-family: 'Courier New', Courier, monospace;
 }
 
 header{
-    background-color: rgba(255, 240, 245, 0.5);
+    /*background-color: rgba(255, 240, 245, 0.5);*/
+    /*background-color: rgba(176, 140, 145, 1);*/
+    background-color: #f6e5e8;
+    /*border: 1px solid;*/
     padding: 10px;
     color: white;
     position: fixed;
@@ -27,12 +32,6 @@ main{
     grid-template-columns: repeat(4, 1fr); /* Three equal-width columns */
     gap: 10px; /* Gap between grid items */
 }
-
-/*.main_card::after{*/
-/*    content: "";*/
-/*    flex-basis: 300px;*/
-/*    flex-grow: 0;*/
-/*}*/
 
 .card {
     transition: transform 0.3s ease;
@@ -55,8 +54,6 @@ main{
     align-items: center;
 }
 
-
-/* Add some padding inside the card container */
 .container {
     padding: 2px 15px 15px 15px;
     display: flex;
@@ -68,7 +65,7 @@ main{
     cursor: text;
     font-size: 12px;
     padding:8px;
-    width: 200px;
+    width: 230px;
     background-color: #fff;
     border: 1px solid #d6d6e7;
     border-radius: 3px;
@@ -91,11 +88,11 @@ h2{
     font-size: 2.6rem;
 }
 
-label{
-    margin: 0;
-    font-size: 1.3rem;
-    color: black;
-}
+/*label{*/
+/*    margin: 0;*/
+/*    font-size: 1.3rem;*/
+/*    color: black;*/
+/*}*/
 
 h3 {
     margin: 0;
@@ -145,6 +142,10 @@ p, h4{
     transition: background-color .3s ease-out;
     cursor: pointer;
 }
+
+/*.btn_delete{*/
+/*    color: red;*/
+/*}*/
 
 .btn_search, .btn_create{
     border: none;
@@ -229,3 +230,42 @@ p, h4{
     font-weight: bold;
 }
 
+.btns_2{
+    display: flex;
+    height: 35px;
+    /*justify-content: flex-end;*/
+}
+
+.btns_left{
+    display: flex;
+    justify-content: flex-start;
+    height: 20px;
+    width: 90%;
+    padding: 5px 1px 5px;
+}
+
+.btns_right{
+    height: 20px;
+    width: 20%;
+    display: flex;
+}
+
+.users_disp{
+    display: flex;
+    width: 100%;
+    height: 50px;
+    color:black;
+    padding:10px;
+}
+
+.float, .float2{
+    font-size: large;
+    font-weight: bold;
+    padding-right: 2px;
+}
+
+.float2{
+    /*padding-left: 10px;*/
+    padding-left: 10px;
+    padding-right: 2px;
+}
