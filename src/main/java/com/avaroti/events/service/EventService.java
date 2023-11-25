@@ -7,9 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,23 +29,47 @@ public class EventService {
 //        DayOfWeek dayOfWeek = date.getDayOfWeek();
         event.setDate(event.getDate());
         event.setLocation(event.getLocation().toUpperCase());
+        event.setView_count(0);
         event.setAttendance(event.getAttendanceList() == null ? 0 : event.getAttendanceList().size());
         return repo.save(event);
     }
 
-    public List<Events> getAll(){
-        return repo.findAllByOOrderByDate();
+    public List<Events> getAllValid(){
+        List<Events> evs =repo.findAllByOOrderByDate();
+        evs  = evs.stream().filter(e ->
+                LocalDateTime.of(
+                        LocalDate.parse(e.getDate()),
+                        LocalTime.parse(e.getStart_time())).isAfter(LocalDateTime.now()))
+                .toList();
+        return evs;
+    }
+
+    public List<Events> getAllInvalid(){
+        List<Events> evs =repo.findAllByOOrderByDate();
+        evs  = evs.stream().filter(e ->
+                        LocalDateTime.of(
+                                LocalDate.parse(e.getDate()),
+                                LocalTime.parse(e.getStart_time())).isBefore(LocalDateTime.now()))
+                .toList();
+        return evs;
     }
     public Events getEventById(String id) {
-        return repo.findById(id).orElse(new Events());
+        Events ev =  repo.findById(id).orElse(new Events());
+        ev.setView_count(ev.getView_count()+1);
+        repo.save(ev);
+        return ev;
     }
 
     public void attendance(Attendance attendance, String id){
+        int count = 0;
         Events ev = repo.findById(id).orElse(null);
         if(ev!=null) {
-            List<Attendance> attendanceList = ev.getAttendanceList() == null ? new ArrayList<>() : ev.getAttendanceList();
+            if(ev.getAttendanceList()!= null) {
+                count = ev.getAttendanceList().size();
+            }
+            List<Attendance> attendanceList = ev.getAttendanceList()== null ? new ArrayList<>() : ev.getAttendanceList();
             attendanceList.add(attendance);
-            ev.setAttendance(ev.getAttendanceList() == null ? 0 : ev.getAttendanceList().size() + 1);
+            ev.setAttendance(count+1);
             ev.setAttendanceList(attendanceList);
             repo.save(ev);
         }
@@ -55,11 +79,6 @@ public class EventService {
         System.out.println("EVENT ID: " +  id);
         Events ev = repo.findById(id).orElse(null);
         if(ev != null) {
-//            String inputDate = updatedEvent.getDate();
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//            LocalDate date = LocalDate.parse(inputDate, formatter);
-//            DayOfWeek dayOfWeek = date.getDayOfWeek();
-//            ev.setDate(inputDate + " (" + String.valueOf(dayOfWeek).substring(0,3) +")");
             ev.setDate(updatedEvent.getDate());
             ev.setDescription(updatedEvent.getDescription());
             ev.setLocation(updatedEvent.getLocation());

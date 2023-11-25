@@ -3,18 +3,17 @@ package com.avaroti.events.controller;
 import com.avaroti.events.model.Attendance;
 import com.avaroti.events.model.Events;
 import com.avaroti.events.service.EventService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequiredArgsConstructor
@@ -59,7 +58,6 @@ public class EventsController {
     public String submitAttendance(Model model, @RequestParam("ev_id") String id,  @ModelAttribute("attendee") Attendance attendance){
         log.info("SUBMIT Event_ID: {}", id);
         service.attendance(attendance, id);
-
         return "redirect:/eventDisplay?ev_id=" + id;
     }
 }
