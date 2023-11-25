@@ -32,7 +32,7 @@
             <div class="card" th:each="ev: ${events}">
                 <div class="img_container">
                     <a style="text-decoration: none" th:href="@{/eventDisplay(ev_id=${ev.getId()})}" class="link_image">
-                        <div th:style="'background-image: url(' + ${ev.getImageSrc()} + '); height: 100%; width: 100%;  background-size: cover; background-position: center; border-top-left-radius: 10px; border-top-right-radius: 10px; background-repeat: none'">
+                        <div th:style="'background-image: url(' + ${ev.getImageSrc()} + '); height: 100%; width: 100%;  background-size: cover; background-position: top center; border-top-left-radius: 10px; border-top-right-radius: 10px; background-repeat: none'">
                         </div>
                     </a>
                 </div>
