@@ -25,10 +25,10 @@
 <!--                    <p><b>create events</b></p>-->
 <!--                </div>-->
                 <div class="inputs">
-                    <input class="ins" th:field="*{name}" type="text" placeholder="event name" required/>
+                    <input class="ins" th:field="*{name}" type="text" placeholder="event name" minlength="1" maxlength="30" required/>
                 </div>
                 <div class="inputs">
-                    <input class="ins" th:field="*{location}" type="text" placeholder="location" required/>
+                    <input class="ins" th:field="*{location}" type="text" placeholder="location" minlength="1" maxlength="20" required/>
                 </div>
                 <div class="inputs">
                     <input class="ins" th:field="*{date}" type="date" placeholder="date" required/>
