@@ -118,6 +118,7 @@ p, h4{
     overflow: hidden;
     -webkit-line-clamp: 1; /* Number of lines to display */
     text-overflow: ellipsis;
+    max-width: 280px;
     /*max-height: 4em; !* Adjust based on your font size and line height *!*/
 }
 
