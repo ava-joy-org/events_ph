@@ -4,7 +4,6 @@ import com.avaroti.events.model.Attendance;
 import com.avaroti.events.model.Events;
 import com.avaroti.events.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,14 +18,7 @@ public class EventService {
 
     private final EventRepository repo;
 
-    private final MongoTemplate template;
-
-
     public Events create(Events event) {
-//        String inputDate = event.getDate();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//        LocalDate date = LocalDate.parse(inputDate, formatter);
-//        DayOfWeek dayOfWeek = date.getDayOfWeek();
         event.setDate(event.getDate());
         event.setLocation(event.getLocation().toUpperCase());
         event.setView_count(0);

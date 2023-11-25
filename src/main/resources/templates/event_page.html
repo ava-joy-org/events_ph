@@ -19,12 +19,12 @@
         <div class="third_div">
             <div class="third_details_div">
                 <div class="disp">
-                    <div class="disp_left"><i class="fa-regular fa-calendar-days"></i></i></div>
-                    <div class="disp_right"><p th:text="${ev_data.getDate()}"></p></div>
+                    <div class="disp_left"><i class="fa-regular fa-calendar-days"></i></div>
+                    <div class="disp_right"><p th:text="${ev_data.getDate()} + ' (' + ${dayWeek} + ')'"></p></div>
                 </div>
                 <div class="disp">
                     <div class="disp_left"><i class="fa-solid fa-clock"></i></div>
-                    <div class="disp_right"><p th:text="${ev_data.getStart_time()}"></p></div>
+                    <div class="disp_right"><p th:text="${ev_data.getStart_time()} + ' ~ ' + ${timeEnd} + ' (' + ${ev_data.getDuration()} + ' hours)'"></p></div>
                 </div>
                 <div class="disp">
                     <div class="disp_left"><i class="fa-solid fa-location-dot"></i></div>

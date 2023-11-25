@@ -133,8 +133,7 @@ input[type="date"], input[type="number"],input[type="time"] {
 }
 
 .btn_join:hover {
-    border: 1px solid;
-    border-color: black;
+    border: 1px solid black;
     background-color:transparent;
     cursor: pointer;
 }
