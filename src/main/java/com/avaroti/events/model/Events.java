@@ -3,10 +3,6 @@ package com.avaroti.events.model;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraintvalidation.SupportedValidationTarget;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Document(collection = "event_list")

@@ -3,17 +3,18 @@ package com.avaroti.events.controller;
 import com.avaroti.events.model.Attendance;
 import com.avaroti.events.model.Events;
 import com.avaroti.events.service.EventService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.DayOfWeek;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,6 +28,7 @@ public class EventsController {
         log.info("Creating new Event");
         model.addAttribute("events", new Events());
         model.addAttribute("update_status", false);
+        model.addAttribute("defaultDate", "2023-01-01");
         return "new_event";
     }
 
@@ -41,7 +43,11 @@ public class EventsController {
     public String displayEvent(Model model, @RequestParam("ev_id") String id) {
         log.info("Display event. EventID: {}", id);
         Events ev = service.getEventById(id);
+        String timeEnd = (LocalTime.parse(ev.getStart_time()).plusHours(ev.getDuration())).toString();
+        DayOfWeek dayOfWeek = LocalDate.parse(ev.getDate()).getDayOfWeek();
         model.addAttribute("ev_data", ev);
+        model.addAttribute("timeEnd", timeEnd);
+        model.addAttribute("dayWeek", dayOfWeek.toString().substring(0,3));
         model.addAttribute("attendees",ev.getAttendanceList());
         return "event_page";
     }

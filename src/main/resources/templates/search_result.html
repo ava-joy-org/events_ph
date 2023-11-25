@@ -8,14 +8,16 @@
 </head>
 <body>
 <!--    <div th:replace="~{fragment.html :: frg_header}"></div>-->
+
     <header>
         <div class="btn_area">
+<!--            <h3 th:text="'FOUND ' + ${searchCount} + ' RESULTS FOR ' + ${keyword}"></h3>-->
             <div class="header_area">
                 <form th:method="get" th:action="@{/search}">
-                    <label for="searchTxt">
-                        SEARCH:
-                        <input class="search_txt" th:name="${'searchWord'}" type="text" id="searchTxt"/>
-                    </label>
+<!--                    <label for="searchTxt">-->
+<!--                        SEARCH:-->
+                        <input class="search_txt" th:name="${'searchWord'}" type="text" id="searchTxt" placeholder="search"/>
+<!--                    </label>-->
                     <button class="btn_search" type="submit">SEARCH</button>
                 </form>
                 <form th:action="@{/home}" method="get">
