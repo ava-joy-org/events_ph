@@ -17,11 +17,11 @@ public class HomeController {
 
     private final EventService service;
 
-
-    @GetMapping("/test")
-    public String test(){
-        return "sample";
+    @GetMapping("/")
+    public String top(){
+        return "redirect:/home";
     }
+
     @GetMapping("/home")
     public String home(Model model, @ModelAttribute("keyword") String keyword) {
         log.info("Home page display");
