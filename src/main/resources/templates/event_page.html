@@ -46,16 +46,53 @@
             <div class="third_btn_div">
                 <div class="btn_div1">
                     <form th:method="get" th:action="@{/home}">
-<!--                        <input type="hidden" th:name="${'ev_id'}" th:value="${ev_data.getId()}"/>-->
-                        <button class="btn_join" type="submit">HOME</button>
+                        <button class="btn_home" type="submit">HOME</button>
                     </form>
                 </div>
-                <div class="btn_div2">
-                    <form th:method="get" th:action="@{/newAttendance}">
+            </div>
+        </div>
+        <div class="join_div">
+            <div class="join_btns1">
+                <form th:method="post" th:object="${attendee}" th:action="@{/submitAttendance}">
+                    <div>
                         <input type="hidden" th:name="${'ev_id'}" th:value="${ev_data.getId()}"/>
+                    </div>
+                    <div>
+                        <input th:field="*{name}" class="join_ins" id="memberNameTxt" type="text" placeholder="full name" required>
+                    </div>
+
+                    <div>
+                        <input th:field="*{email}" class="join_ins" id="emailTxt" type="email" placeholder="email address" required>
+                    </div>
+
+                    <div>
+                        <input th:field="*{contact_no}" class="join_ins" id="contactNoTxt" type="tel" placeholder="contact number" required>
+                    </div>
+                    <div>
                         <button class="btn_join" type="submit">JOIN NOW</button>
-                    </form>
-                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="join_btns2" th:if="${attendees==null}">
+                <p>NO ATTENDEES YET.</p>
+            </div>
+            <div class="join_btns2" th:if="${attendees != null}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="th_num">#</th>
+                            <th class="th_name">NAME</th>
+                            <th class="th_email">EMAIL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="joiners : ${attendees}">
+                            <td class="th_num" th:text="${attendees.indexOf(joiners) + 1}"></td>
+                            <td class="th_name" th:text="${joiners.getName()}"></td>
+                            <td class="th_email" th:text="${joiners.getEmail()}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

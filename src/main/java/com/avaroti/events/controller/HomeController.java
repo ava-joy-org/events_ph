@@ -1,14 +1,20 @@
 package com.avaroti.events.controller;
 
+import com.avaroti.events.configs.WebClientConfig;
 import com.avaroti.events.model.Events;
 import com.avaroti.events.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -16,6 +22,7 @@ import java.util.List;
 public class HomeController {
 
     private final EventService service;
+    private final WebClientConfig webClientConfig;
 
     @GetMapping("/")
     public String top(){
@@ -26,10 +33,14 @@ public class HomeController {
     public String home(Model model, @ModelAttribute("keyword") String keyword) {
         log.info("Home page display");
         List<Events> open = service.getAllValid();
-        List<Events> closed = service.getAllInvalid();
+//        List<Events> closed = service.getAllInvalid();
         model.addAttribute("events", open);
-        model.addAttribute("closed", closed);
+//        model.addAttribute("closed", closed);
         model.addAttribute("keyword", keyword);
+
+        String countryName = "philippines";
+        String url = "https://restcountries.com/v3.1/name/"+ countryName;
+        RestTemplate temp = new RestTemplate();
         return "index";
     }
 
@@ -42,7 +53,7 @@ public class HomeController {
     @GetMapping("/visitToUpdate/{id}")
     public String visitToUpdate(Model model, @PathVariable("id") String id){
         log.info("Updating eventID: {}", id);
-        Events ev = service.getEventById(id);
+        Events ev = service.getEventById(id, 0);
         model.addAttribute("events", ev);
         model.addAttribute("update_id", id);
         model.addAttribute("update_status", true);

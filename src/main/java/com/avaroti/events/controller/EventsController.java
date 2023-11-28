@@ -42,23 +42,26 @@ public class EventsController {
     @GetMapping("/eventDisplay")
     public String displayEvent(Model model, @RequestParam("ev_id") String id) {
         log.info("Display event. EventID: {}", id);
-        Events ev = service.getEventById(id);
+        Events ev = service.getEventById(id, 1);
         String timeEnd = (LocalTime.parse(ev.getStart_time()).plusHours(ev.getDuration())).toString();
         DayOfWeek dayOfWeek = LocalDate.parse(ev.getDate()).getDayOfWeek();
         model.addAttribute("ev_data", ev);
         model.addAttribute("timeEnd", timeEnd);
         model.addAttribute("dayWeek", dayOfWeek.toString().substring(0,3));
         model.addAttribute("attendees",ev.getAttendanceList());
+
+        model.addAttribute("attendee", new Attendance());
+        model.addAttribute("ev_id", id);
         return "event_page";
     }
 
-    @GetMapping("/newAttendance")
-    public String attendance(Model model, @RequestParam("ev_id") String id){
-        log.info("EVENT ID: {}",id);
-        model.addAttribute("attendee", new Attendance());
-        model.addAttribute("ev_id", id);
-        return "attendance";
-    }
+//    @GetMapping("/newAttendance")
+//    public String attendance(Model model, @RequestParam("ev_id") String id){
+//        log.info("EVENT ID: {}",id);
+//        model.addAttribute("attendee", new Attendance());
+//        model.addAttribute("ev_id", id);
+//        return "attendance";
+//    }
 
     @PostMapping("/submitAttendance")
     public String submitAttendance(Model model, @RequestParam("ev_id") String id,  @ModelAttribute("attendee") Attendance attendance){

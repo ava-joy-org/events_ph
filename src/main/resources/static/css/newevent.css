@@ -41,7 +41,7 @@ body{
 .left_disp{
     height: 100%;
     width: 100%;
-    background-image: url("https://images.pexels.com/photos/1891234/pexels-photo-1891234.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    background-image: url("../images/events_bg1.jpeg");
     background-color: rgba(255,255,255,0.5);
     background-repeat: no-repeat;
     background-position: center;

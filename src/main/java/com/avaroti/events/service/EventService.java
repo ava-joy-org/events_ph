@@ -38,16 +38,17 @@ public class EventService {
 
     public List<Events> getAllInvalid(){
         List<Events> evs =repo.findAllByOOrderByDate();
-        evs  = evs.stream().filter(e ->
-                        LocalDateTime.of(
-                                LocalDate.parse(e.getDate()),
-                                LocalTime.parse(e.getStart_time())).isBefore(LocalDateTime.now()))
-                .toList();
+//        evs  = evs.stream().filter(e ->
+//                        LocalDateTime.of(
+//                                LocalDate.parse(e.getDate()),
+//                                LocalTime.parse(e.getStart_time())).isBefore(LocalDateTime.now()))
         return evs;
     }
-    public Events getEventById(String id) {
+    public Events getEventById(String id, int type) {
         Events ev =  repo.findById(id).orElse(new Events());
-        ev.setView_count(ev.getView_count()+1);
+        if(type == 1) {
+            ev.setView_count(ev.getView_count()+1);
+        }
         repo.save(ev);
         return ev;
     }
