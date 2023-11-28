@@ -72,10 +72,10 @@
                         <form th:method="get" th:action="@{/eventDisplay}">
                             <button class="btn_details" type="submit" th:name="${'ev_id'}" th:value="${ev.getId()}">DETAILS</button>
                         </form>
-                        <form th:method="get" th:action="@{/newAttendance}">
-                            <input type="hidden" th:name="${'ev_id'}" th:value="${ev.getId()}"/>
-                            <button class="btn_join" type="submit">JOIN NOW</button>
-                        </form>
+<!--                        <form th:method="get" th:action="@{/newAttendance}">-->
+<!--                            <input type="hidden" th:name="${'ev_id'}" th:value="${ev.getId()}"/>-->
+<!--                            <button class="btn_join" type="submit">JOIN NOW</button>-->
+<!--                        </form>-->
                     </div>
                 </div>
             </div>

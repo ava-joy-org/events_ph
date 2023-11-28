@@ -200,11 +200,11 @@ p, h4{
     align-content: center;
 }
 
-.btn_details, .btn_join{
+.btn_details{
     border-width: 1px;
     /*display:inline-block;*/
     padding:0.6em 1.5em;
-    width: 140px;
+    width: 290px;
     margin: 5px;
     border-radius:2em;
     font-weight:500;
