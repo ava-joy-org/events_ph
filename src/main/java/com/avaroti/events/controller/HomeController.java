@@ -1,20 +1,15 @@
 package com.avaroti.events.controller;
 
-import com.avaroti.events.configs.WebClientConfig;
 import com.avaroti.events.model.Events;
 import com.avaroti.events.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.Duration;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -22,7 +17,6 @@ import java.util.Objects;
 public class HomeController {
 
     private final EventService service;
-    private final WebClientConfig webClientConfig;
 
     @GetMapping("/")
     public String top(){
