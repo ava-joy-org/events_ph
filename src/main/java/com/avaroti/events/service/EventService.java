@@ -19,21 +19,22 @@ public class EventService {
     private final EventRepository repo;
 
     public Events create(Events event) {
+        event.setName(event.getName().toLowerCase());
         event.setDate(event.getDate());
-        event.setLocation(event.getLocation().toUpperCase());
+        event.setLocation(event.getLocation().toLowerCase());
         event.setView_count(0);
+        event.setDescription(event.getDescription());
         event.setAttendance(event.getAttendanceList() == null ? 0 : event.getAttendanceList().size());
         return repo.save(event);
     }
 
     public List<Events> getAllValid(){
-        List<Events> evs =repo.findAllByOOrderByDate();
-//        evs  = evs.stream().filter(e ->
-//                LocalDateTime.of(
-//                        LocalDate.parse(e.getDate()),
-//                        LocalTime.parse(e.getStart_time())).isAfter(LocalDateTime.now()))
-//                .toList();
-        return evs;
+       return repo.findAllByOOrderByDate()
+               .stream()
+               .filter(e -> LocalDateTime.of(
+                            LocalDate.parse(e.getDate()),
+                            LocalTime.parse(e.getStart_time())).isAfter(LocalDateTime.now()))
+               .toList();
     }
 
     public List<Events> getAllInvalid(){
@@ -72,8 +73,8 @@ public class EventService {
         System.out.println("EVENT ID: " +  id);
         Events ev = repo.findById(id).orElse(null);
         if(ev != null) {
-            ev.setName(updatedEvent.getName());
-            ev.setLocation(updatedEvent.getLocation());
+            ev.setName(updatedEvent.getName().toLowerCase());
+            ev.setLocation(updatedEvent.getLocation().toLowerCase());
             ev.setDate(updatedEvent.getDate());
             ev.setStart_time(updatedEvent.getStart_time());
             ev.setDuration(updatedEvent.getDuration());
@@ -89,6 +90,10 @@ public class EventService {
     }
 
     public List<Events> search(String keyword){
-        return repo.searchByName(keyword);
+        return repo.searchByName(keyword.toLowerCase()).stream().filter(e ->
+                        LocalDateTime.of(
+                                LocalDate.parse(e.getDate()),
+                                LocalTime.parse(e.getStart_time())).isAfter(LocalDateTime.now()))
+                .toList();
     }
 }

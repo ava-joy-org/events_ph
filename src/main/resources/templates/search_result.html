@@ -12,8 +12,8 @@
         <div class="btn_area">
             <div class="header_area">
                 <form th:method="get" th:action="@{/search}">
-                        <input class="search_txt" th:name="${'searchWord'}" type="text" id="searchTxt" placeholder="search"/>
-                    <button class="btn_search" type="submit">SEARCH</button>
+                    <input class="search_txt" th:name="${'searchWord'}" type="text" id="searchTxt" placeholder="search" th:oninput="toggleSearchButton()"/>
+                    <button class="btn_search" type="submit" id="searchBtn" disabled>SEARCH</button>
                 </form>
                 <form th:action="@{/home}" method="get">
                     <button class="btn_create" type="submit">RESET</button>

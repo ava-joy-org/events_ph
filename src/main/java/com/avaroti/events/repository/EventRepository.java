@@ -13,7 +13,7 @@ public interface EventRepository extends MongoRepository<Events, String> {
     @Query(value = "{}", sort= "{date:1, start_time:1}") //ASC
     List<Events> findAllByOOrderByDate();
 
-    @Query("{$or :[{'name': {$regex: ?0}},{'description': {$regex: ?0}},{'location': {$regex: ?0}}]}")
+    @Query("{$or :[{'name': {$regex: ?0}},{'description': {$regex: ?0}}]}")
     List<Events> searchByName(String keyword);
 
 }
