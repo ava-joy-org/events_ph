@@ -4,20 +4,15 @@
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="/css/main.css">
-<!--    <script src="/js/main.js" defer></script>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="/js/main.js" defer></script>
 </head>
 <body>
-<!--    <div th:replace="~{fragment.html :: frg_header}"></div>-->
-
     <header>
         <div class="btn_area">
-<!--            <h3 th:text="'FOUND ' + ${searchCount} + ' RESULTS FOR ' + ${keyword}"></h3>-->
             <div class="header_area">
                 <form th:method="get" th:action="@{/search}">
-<!--                    <label for="searchTxt">-->
-<!--                        SEARCH:-->
                         <input class="search_txt" th:name="${'searchWord'}" type="text" id="searchTxt" placeholder="search"/>
-<!--                    </label>-->
                     <button class="btn_search" type="submit">SEARCH</button>
                 </form>
                 <form th:action="@{/home}" method="get">
@@ -26,34 +21,52 @@
             </div>
         </div>
     </header>
-    <h2 th:text="'Found ' + ${searchCount} +' results for ' + ${keyword}"></h2>
     <main>
+        <h2 th:if="${searchCount > 1}" th:text="'Found ' + ${searchCount} +' results for ' + ${keyword}"></h2>
+        <h2 th:if="${searchCount < 2}" th:text="'Found ' + ${searchCount} +' result for ' + ${keyword}"></h2>
         <div class="main_card">
             <div class="card" th:each="ev: ${events}">
                 <div class="img_container">
-                    <a th:href="@{/eventDisplay(ev_id=${ev.getId()})}" class="link_image">
-                        <div th:style="'background-image: url(' + ${ev.getImageSrc()} + '); height: 100%; width: 100%;  background-size: cover; background-position: center; border-top-left-radius: 10px; border-top-right-radius: 10px; background-repeat: none'">
+                    <a style="text-decoration: none" th:href="@{/eventDisplay(ev_id=${ev.getId()})}" class="link_image">
+                        <div th:style="'background-image: url(' + ${ev.getImageSrc()} + '); height: 100%; width: 100%;  background-size: cover; background-position: top center; border-top-left-radius: 10px; border-top-right-radius: 10px; background-repeat: none'">
                         </div>
                     </a>
                 </div>
                 <div class="container">
-                    <div class="btn_area">
-                        <form th:method="get" th:action="@{/visitToUpdate/{id}(id=${ev.id})}">
-                            <button class="btn_update" type="submit"><i class="fa-solid fa-pen"></i></button>
-                        </form>
-                        <form th:method="post" th:action="@{/delete/{id}(id=${ev.id})}">
-                            <button class="btn_delete" type="submit"><i class="fa-solid fa-trash"></i></button>
+                    <div class="btns_2">
+                        <div class="btns_left">
+                            <p class="float" th:text="${ev.getAttendance()}"></p>
+                            <p><i class="fa-solid fa-user"></i></p>
+                            <p class="float2" th:text="${ev.getView_count()}"></p>
+                            <p><i class="fa-regular fa-eye"></i></p>
+                        </div>
+                        <div class="btns_right">
+                            <form th:method="get" th:action="@{/visitToUpdate/{id}(id=${ev.id})}">
+                                <button class="btn_update" type="submit"><i class="fa-solid fa-pen"></i></button>
+                            </form>
+                            <form th:method="post" th:action="@{/delete/{id}(id=${ev.id})}">
+                                <button class="btn_delete" type="submit"><i class="fa-solid fa-trash"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <h3 class="title_area"> <span th:text="${ev.getName()}"></span> </h3>
+                    <div class="loc_area">
+                        <p>
+                            <div class="time_div"><span th:text="${ev.getDate()}" style=" margin-right: 5px"></span>
+                                <span th:text="${ev.getStart_time()}" style=" margin-right: 5px"></span></div>
+                            <div class="loc_div"><span><i class="fa-solid fa-location-dot"></i></span>
+                                <span class="txt_location" th:text="${ev.getLocation()}"></span></div>
+                        </p>
+                    </div>
+                    <div class="desc_area">
+                        <p><strong>Description: </strong></p>
+                        <p class="clipped-container" th:text="${ev.getDescription()}"></p>
+                    </div>
+                    <div class="bottom_area">
+                        <form th:method="get" th:action="@{/eventDisplay}">
+                            <button class="btn_details" type="submit" th:name="${'ev_id'}" th:value="${ev.getId()}">DETAILS</button>
                         </form>
                     </div>
-                    <h3> <span th:text="${ev.getName()}"></span> </h3>
-                    <p>
-                        <span th:text="${ev.getDate()}" style=" margin-right: 5px"></span>
-                        <span th:text="${ev.getStart_time()}" style=" margin-right: 5px"></span>
-                        <span th:text="${ev.getLocation()}"></span>
-                    </p>
-                    <br>
-                    <p><strong>Description: </strong></p>
-                    <p class="clipped-container" th:text="${ev.getDescription()}"></p>
                 </div>
             </div>
         </div>

@@ -72,12 +72,13 @@ public class EventService {
         System.out.println("EVENT ID: " +  id);
         Events ev = repo.findById(id).orElse(null);
         if(ev != null) {
-            ev.setDate(updatedEvent.getDate());
-            ev.setDescription(updatedEvent.getDescription());
-            ev.setLocation(updatedEvent.getLocation());
-            ev.setStart_time(updatedEvent.getStart_time());
             ev.setName(updatedEvent.getName());
+            ev.setLocation(updatedEvent.getLocation());
+            ev.setDate(updatedEvent.getDate());
+            ev.setStart_time(updatedEvent.getStart_time());
+            ev.setDuration(updatedEvent.getDuration());
             ev.setImageSrc(updatedEvent.getImageSrc());
+            ev.setDescription(updatedEvent.getDescription());
             return repo.save(ev);
         }
         return null;

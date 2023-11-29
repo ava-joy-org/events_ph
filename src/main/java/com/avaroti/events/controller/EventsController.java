@@ -65,7 +65,7 @@ public class EventsController {
 
     @PostMapping("/submitAttendance")
     public String submitAttendance(Model model, @RequestParam("ev_id") String id,  @ModelAttribute("attendee") Attendance attendance){
-        log.info("SUBMIT Event_ID: {}", id);
+        log.info("SUBMIT New Attendance for Event_ID: {}", id);
         service.attendance(attendance, id);
         return "redirect:/eventDisplay?ev_id=" + id;
     }
