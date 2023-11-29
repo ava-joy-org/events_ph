@@ -10,7 +10,6 @@
 <body>
     <header>
         <div class="btn_area">
-<!--            <h2>EVENT LIST</h2> -->
             <div class="header_area">
                 <form th:action="@{/create}" method="get">
                     <button class="btn_create" type="submit">CREATE</button>
@@ -18,11 +17,8 @@
             </div>
             <div class="header_area">
                 <form th:method="get" th:action="@{/search}">
-<!--                    <label for="searchTxt">-->
-<!--                        SEARCH:-->
-                        <input class="search_txt" th:name="${'searchWord'}" type="text" id="searchTxt" placeholder="search"/>
-<!--                    </label>-->
-                    <button class="btn_search" type="submit">SEARCH</button>
+                        <input class="search_txt" th:name="${'searchWord'}" type="text" id="searchTxt" placeholder="search" th:oninput="toggleSearchButton()"/>
+                    <button class="btn_search" type="submit" id="searchBtn" disabled>SEARCH</button>
                 </form>
             </div>
         </div>
@@ -90,6 +86,19 @@
         setInterval(function() {
             location.reload();
         }, (60*1000));
+
+        function toggleSearchButton() {
+            var searchInput = document.getElementById('searchTxt');
+            var searchButton = document.getElementById('searchBtn');
+
+            // Enable the search button if the input is not empty, otherwise, disable it
+            searchButton.disabled = searchInput.value.trim() === '';
+        }
+
+        // function search() {
+        //     // Implement your search logic here
+        //     alert('Searching for: ' + document.getElementById('searchTxt').value);
+        // }
     </script>
 </body>
 </html>

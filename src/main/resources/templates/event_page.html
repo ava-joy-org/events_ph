@@ -77,22 +77,28 @@
                 <p>NO ATTENDEES YET.</p>
             </div>
             <div class="join_btns2" th:if="${attendees != null}">
-                <table>
-                    <thead>
+                <div class="tbl_top">
+                    <table>
+                        <thead>
                         <tr>
                             <th class="th_num">#</th>
                             <th class="th_name">NAME</th>
                             <th class="th_email">EMAIL</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                    </table>
+                </div>
+                <div class="tbl_bot">
+                    <table>
+                        <tbody>
                         <tr th:each="joiners : ${attendees}">
                             <td class="th_num" th:text="${attendees.indexOf(joiners) + 1}"></td>
                             <td class="th_name" th:text="${joiners.getName()}"></td>
                             <td class="th_email" th:text="${joiners.getEmail()}"></td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

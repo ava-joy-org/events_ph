@@ -104,7 +104,7 @@ body{
 }
 
 h1{
-    padding: 15px;
+    /*padding: 15px;*/
     border: none;
     margin: 0;
     text-transform: uppercase;
@@ -243,10 +243,10 @@ p{
 .join_btns2{
     /*height: 50%;*/
     /*justify-content: center;*/
-    max-height: 300px;
+    /*max-height: 300px;*/
     width: 90%;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /*overflow-y: auto;*/
+    /*overflow-x: hidden;*/
     padding: 20px;
     /*background-color: green;*/
 }
@@ -303,4 +303,18 @@ input::placeholder,
 input[type="email"], input[type="text"]{
     font-family: 'Courier New', Courier, monospace;
     font-weight: normal;
+}
+
+.tbl_top{
+    height: 30px;
+    width: 100%;
+    /*background-color: orange;*/
+}
+
+.tbl_bot{
+    width: 100%;
+    max-height: 290px;
+    /*background-color: green;*/
+    overflow-y: auto;
+    overflow-x: hidden;
 }
