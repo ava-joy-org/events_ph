@@ -129,6 +129,7 @@ p, h4{
     -webkit-line-clamp: 3; /* Number of lines to display */
     text-overflow: ellipsis;
     max-height: 4em; /* Adjust based on your font size and line height */
+    /*text-transform: uppercase;*/
 }
 
 .btn_delete, .btn_update{
