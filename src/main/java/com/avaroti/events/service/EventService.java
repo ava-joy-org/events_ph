@@ -28,11 +28,11 @@ public class EventService {
 
     public List<Events> getAllValid(){
         List<Events> evs =repo.findAllByOOrderByDate();
-        evs  = evs.stream().filter(e ->
-                LocalDateTime.of(
-                        LocalDate.parse(e.getDate()),
-                        LocalTime.parse(e.getStart_time())).isAfter(LocalDateTime.now()))
-                .toList();
+//        evs  = evs.stream().filter(e ->
+//                LocalDateTime.of(
+//                        LocalDate.parse(e.getDate()),
+//                        LocalTime.parse(e.getStart_time())).isAfter(LocalDateTime.now()))
+//                .toList();
         return evs;
     }
 
